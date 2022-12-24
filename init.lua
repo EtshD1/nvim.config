@@ -1,0 +1,2 @@
+require("etsh")
+print("hello")
