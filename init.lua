@@ -1,2 +1,1 @@
 require("etsh")
-print("hello")

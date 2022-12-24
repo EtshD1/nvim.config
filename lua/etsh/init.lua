@@ -1,1 +1,1 @@
-print("Hello from etsh")
+require("etsh.remap")
