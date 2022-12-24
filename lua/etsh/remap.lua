@@ -1,3 +1,4 @@
+print("Reading lua/etsh/remap.lua")
 -- Leader Key
 vim.g.mapleader = " "
 
