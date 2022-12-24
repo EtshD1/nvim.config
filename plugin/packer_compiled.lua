@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/etsh/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  catppuccin = {
+    loaded = true,
+    path = "/Users/etsh/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/etsh/.local/share/nvim/site/pack/packer/start/packer.nvim",

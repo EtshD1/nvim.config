@@ -1,4 +1,3 @@
-print("Reading lua/etsh/remap.lua")
 -- Leader Key
 vim.g.mapleader = " "
 
@@ -15,6 +14,7 @@ keymap.set('n', 'U', '<C-r>')
 
 -- Clipboard Usage
 -- \ Pasting
+keymap.set('i', '<C-p>', '<esc>"*pa')
 keymap.set('n', '<C-p>', '"*p')
 keymap.set('n', '<C-S-p>', '"*P')
 keymap.set('v', '<C-p>', '"*p')
