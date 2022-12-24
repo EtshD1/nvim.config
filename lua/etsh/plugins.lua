@@ -32,6 +32,9 @@ return require('packer').startup(function(use)
 	if packer_bootstrap then
 		require('packer').sync()
 	end
+	-- Catppuccin Theme
 	use { "catppuccin/nvim", as = "catppuccin" }
+	-- Treesiter
+	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 end)
 
