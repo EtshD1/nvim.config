@@ -20,6 +20,10 @@ vim.cmd([[
 ]])
 
 return require('packer').startup(function(use)
+    -- Typescript
+	use("jose-elias-alvarez/typescript.nvim")
+    -- LSP utils
+    use({ "glepnir/lspsaga.nvim", branch = "main" })
     -- Icons
     use 'nvim-tree/nvim-web-devicons'
 	-- Packer can manage itself
