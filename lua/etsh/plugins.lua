@@ -27,11 +27,6 @@ return require('packer').startup(function(use)
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
-	-- Comment Manager
-	use 'numToStr/Comment.nvim'
-	if packer_bootstrap then
-		require('packer').sync()
-	end
 	-- Catppuccin Theme
 	use { "catppuccin/nvim", as = "catppuccin" }
 	-- Treesiter
@@ -55,6 +50,21 @@ return require('packer').startup(function(use)
             {'L3MON4D3/LuaSnip'},
             {'rafamadriz/friendly-snippets'},
         }
+    }
+	-- Comment Manager
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+	if packer_bootstrap then
+		require('packer').sync()
+	end
+    -- Neovim statusline
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
 end)
 

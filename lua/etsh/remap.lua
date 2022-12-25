@@ -14,13 +14,13 @@ keymap.set('n', 'U', '<C-r>')
 
 -- Clipboard Usage
 -- \ Pasting
-keymap.set('i', '<C-p>', '<esc>"*pa')
-keymap.set('n', '<C-p>', '"*p')
-keymap.set('n', '<C-S-p>', '"*P')
-keymap.set('v', '<C-p>', '"*p')
-keymap.set('v', '<C-S-p>', '"*P')
+keymap.set('i', '<C-p>', '<esc>"+pa')
+keymap.set('n', '<C-p>', '"+p')
+keymap.set('n', '<C-S-p>', '"+P')
+keymap.set('v', '<C-p>', '"+p')
+keymap.set('v', '<C-S-p>', '"+P')
 -- \ Copying
-keymap.set('v', '<C-y>', '"*y')
+keymap.set('v', '<C-y>', '"+y')
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
