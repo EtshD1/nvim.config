@@ -4,4 +4,3 @@ require("etsh")
 
 local endT = os.clock() - start
 print("Load time: ", endT)
-
