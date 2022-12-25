@@ -74,7 +74,12 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons', -- optional, for file icons
         },
     }
-	if packer_bootstrap then
+    -- Diagnostics
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+    }
+    if packer_bootstrap then
 		require('packer').sync()
 	end
 end)
