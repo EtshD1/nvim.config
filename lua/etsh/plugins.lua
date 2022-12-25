@@ -20,6 +20,8 @@ vim.cmd([[
 ]])
 
 return require('packer').startup(function(use)
+    -- Icons
+    use 'nvim-tree/nvim-web-devicons'
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 	-- Telescope
@@ -58,9 +60,6 @@ return require('packer').startup(function(use)
             require('Comment').setup()
         end
     }
-	if packer_bootstrap then
-		require('packer').sync()
-	end
     -- Neovim statusline
     use {
         'nvim-lualine/lualine.nvim',
@@ -75,5 +74,8 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons', -- optional, for file icons
         },
     }
+	if packer_bootstrap then
+		require('packer').sync()
+	end
 end)
 
