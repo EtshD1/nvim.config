@@ -25,6 +25,3 @@ keymap.set('v', '<C-y>', '"+y')
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')
-
--- Explorer
-keymap.set('n', "<leader>e", vim.cmd.Ex)
