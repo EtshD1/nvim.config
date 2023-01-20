@@ -1,16 +1,27 @@
 local saga_status, saga = pcall(require, "lspsaga")
 if not saga_status then
-	print("lspsaga not found")
-	return
+    print("lspsaga not found")
+    return
 end
 
-saga.init_lsp_saga({
-	move_in_saga = { prev = "<C-k>", next = "<C-j>" },
-	finder_action_keys = {
-		open = "<CR>",
-	},
-	definition_action_keys = {
-		edit = "<CR>",
-	},
+saga.setup({
+    'glepnir/lspsaga.nvim',
+    event = 'BufRead',
+    config = function()
+        require('lspsaga').setup({})
+    end
 })
 
+local keymap = vim.keymap.set
+
+
+keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>") -- see definition and make edits in window
+keymap("n", "gf", "<cmd>Lspsaga lsp_finder<CR>") -- show definition, references
+keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>") -- see available code actions
+keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>") -- smart rename
+keymap("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show  diagnostics for line
+keymap("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show diagnostics for cursor
+keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>") -- jump to previous diagnostic in buffer
+keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>") -- jump to next diagnostic in buffer
+keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>") -- show documentation for what is under cursor

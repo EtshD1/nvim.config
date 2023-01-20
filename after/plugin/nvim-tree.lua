@@ -7,7 +7,7 @@ vim.opt.termguicolors = true
 
 local status, tree = pcall(require, "nvim-tree")
 
-if not status then 
+if not status then
     print("nvim-tree is not found")
     return
 end
