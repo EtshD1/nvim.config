@@ -20,8 +20,6 @@ vim.cmd([[
 ]])
 
 return require('packer').startup(function(use)
-    -- Prettier
-    use('MunifTanjim/prettier.nvim')
     -- Typescript
 	use("jose-elias-alvarez/typescript.nvim")
     -- LSP utils

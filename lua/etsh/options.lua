@@ -8,11 +8,16 @@ opt.relativenumber = true
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
-opt.expandtab = true
 opt.smartindent = true
 
 -- Line wrapping
 opt.wrap = false
+
+-- search settings
+opt.ignorecase = true -- ignore case when searching
+opt.smartcase = true -- case-sensitive Search
+-- cursor line
+opt.cursorline = true -- highlight the current cursor line
 
 opt.termguicolors = true
 opt.background = "dark"

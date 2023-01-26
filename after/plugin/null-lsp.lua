@@ -1,8 +1,8 @@
 local status, null_ls = pcall(require, "null-ls")
 
 if not status then
-    print("null-ls is not found")
-    return
+	print("null-ls is not found")
+	return
 end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
@@ -11,13 +11,22 @@ local formatting = null_ls.builtins.formatting
 -- local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
-    sources = {
-        formatting.prettier.with {
-            extra_args = { "--double-quote", "--jsx-double-quote" },
-        },
-        formatting.csharpier,
-        formatting.stylua,
-    },
+	sources = {
+		formatting.prettier.with {
+			extra_args = function(params)
+				return params.options
+					and params.options.tabSize
+					and {
+						"--tab-width",
+						params.options.tabSize,
+					}
+					and { "--double-quote" }
+					and { "--jsx-double-quote" }
+			end,
+		},
+		formatting.csharpier,
+		formatting.stylua,
+	},
 })
 
 
