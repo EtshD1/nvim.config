@@ -25,3 +25,4 @@ keymap("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show dia
 keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>") -- jump to previous diagnostic in buffer
 keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>") -- jump to next diagnostic in buffer
 keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>") -- show documentation for what is under cursor
+keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>") -- see outline on right hand side
