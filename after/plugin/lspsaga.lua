@@ -16,7 +16,7 @@ local keymap = vim.keymap.set
 
 
 keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
-keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>") -- see definition and make edits in window
+keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>") -- see definition and make edits in window
 keymap("n", "gf", "<cmd>Lspsaga lsp_finder<CR>") -- show definition, references
 keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>") -- see available code actions
 keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>") -- smart rename
