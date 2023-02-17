@@ -4,18 +4,10 @@ if not saga_status then
     return
 end
 
-saga.setup({
-    'glepnir/lspsaga.nvim',
-    event = 'BufRead',
-    config = function()
-        require('lspsaga').setup({})
-    end
-})
+saga.setup({})
 
 local keymap = vim.keymap.set
 
-
-keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
 keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>") -- see definition and make edits in window
 keymap("n", "gf", "<cmd>Lspsaga lsp_finder<CR>") -- show definition, references
 keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>") -- see available code actions

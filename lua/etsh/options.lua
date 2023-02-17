@@ -1,37 +1,52 @@
-local opt = vim.opt
+local o = vim.o
 
--- Line Numbers
-opt.nu = true
-opt.relativenumber = true
-
+-- Make line numbers default
+vim.wo.number = true
+-- Make line numbers relative
+o.relativenumber = true
+-- Enable break indent
+o.breakindent = true
+-- Save undo history
+o.undofile = true
+-- Case insensitive searching UNLESS /C or capital in search
+o.ignorecase = true
+o.smartcase = true
+-- Decrease update time
+o.updatetime = 250
+vim.wo.signcolumn = 'yes'
+-- Set colorscheme
+o.termguicolors = true
+-- Set completeopt to have a better completion experience
+o.completeopt = 'menuone,noselect'
 -- Tabs and indenting
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
-opt.smartindent = true
-
+o.tabstop = 4
+o.softtabstop = 4
+o.shiftwidth = 4
+o.smartindent = true
 -- Line wrapping
-opt.wrap = false
+o.wrap = false
+-- Cursor line
+o.cursorline = true
+-- Terminal Colors
+o.termguicolors = true
+o.background = "dark"
 
--- search settings
-opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- case-sensitive Search
--- cursor line
-opt.cursorline = true -- highlight the current cursor line
+o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+o.undofile = true
 
-opt.termguicolors = true
-opt.background = "dark"
-opt.swapfile = false
-opt.backup = false
-opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-opt.undofile = true
+o.incsearch = true
 
-opt.incsearch = true
+o.scrolloff = 14
+o.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
 
-opt.termguicolors = true
-
-opt.scrolloff = 8
-opt.signcolumn = "yes"
-opt.isfname:append("@-@")
-
-opt.updatetime = 50
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
