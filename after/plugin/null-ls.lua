@@ -19,7 +19,7 @@ null_ls.setup({
 					}
 					and { "--double-quote" }
 					and { "--jsx-double-quote" }
-					and { "--no-semi=false" }
+					and { "--no-semi" }
 			end,
 		}),
 		formatting.csharpier,
