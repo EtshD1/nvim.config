@@ -1,7 +1,7 @@
 local saga_status, saga = pcall(require, "lspsaga")
 if not saga_status then
-    print("lspsaga not found")
-    return
+	print("lspsaga not found")
+	return
 end
 
 saga.setup({})

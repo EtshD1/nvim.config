@@ -1,6 +1,6 @@
 local status, res = pcall(require, 'neodev')
 
-if not status then 
+if not status then
 	print("neodev is not found")
 	return
 end

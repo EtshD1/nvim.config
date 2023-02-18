@@ -3,14 +3,14 @@ local status, res = pcall(require, 'telescope')
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 res.setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
+	defaults = {
+		mappings = {
+			i = {
+				['<C-u>'] = false,
+				['<C-d>'] = false,
+			},
+		},
+	},
 }
 
 -- Enable telescope fzf native, if installed
