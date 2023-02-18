@@ -65,7 +65,7 @@ local on_attach = function(_, bufnr)
 	end, { desc = 'Format current buffer with LSP' })
 end
 
-mason_lspconfig.setup_handlers {
+mason_lspconfig.setup_handlers({
 	function(server_name)
 		require('lspconfig')[server_name].setup {
 			capabilities = capabilities,
@@ -73,4 +73,4 @@ mason_lspconfig.setup_handlers {
 			settings = servers[server_name],
 		}
 	end,
-}
+})

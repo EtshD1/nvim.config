@@ -6,10 +6,11 @@ if not status then
 end
 
 local formatting = null_ls.builtins.formatting
+local builtins = null_ls.builtins
 
 null_ls.setup({
 	sources = {
-		formatting.prettierd.with({
+		formatting.prettier.with({
 			extra_args = function(params)
 				return params.options
 					and params.options.tabSize
@@ -19,10 +20,15 @@ null_ls.setup({
 					}
 					and { "--double-quote" }
 					and { "--jsx-double-quote" }
-					and { "--no-semi" }
+					and { "--no-semi", false }
 			end,
 		}),
 		formatting.csharpier,
 		formatting.stylua,
+		builtins.diagnostics.eslint,
+		builtins.completion.spell,
 	},
 })
+
+-- Format file
+vim.keymap.set("n", "<leader>p", vim.lsp.buf.format)

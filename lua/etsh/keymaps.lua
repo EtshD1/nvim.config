@@ -43,6 +43,3 @@ keymap.set("x", "<leader>p", [["_dP]])
 -- Diagnostic keymaps
 keymap.set('n', '[d', vim.diagnostic.goto_prev)
 keymap.set('n', ']d', vim.diagnostic.goto_next)
-
--- Format file
-keymap.set("n", "<leader>p", vim.lsp.buf.format)

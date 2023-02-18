@@ -111,6 +111,9 @@ packer.startup(function(use)
 	use 'tpope/vim-rhubarb'
 	use 'lewis6991/gitsigns.nvim'
 
+	-- For formatting
+	use 'jose-elias-alvarez/null-ls.nvim'
+
 	use({ "catppuccin/nvim", as = "catppuccin" })
 	use 'nvim-lualine/lualine.nvim' -- Fancier statusline
 	use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
@@ -133,10 +136,6 @@ packer.startup(function(use)
 	end
 end)
 
--- When we are bootstrapping a configuration, it doesn't
--- make sense to execute the rest of the init.lua.
---
--- You'll need to restart nvim, and then it will work.
 if is_bootstrap then
 	print '=================================='
 	print '    Plugins are being installed'
