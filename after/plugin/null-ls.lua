@@ -26,7 +26,6 @@ null_ls.setup({
 		formatting.csharpier,
 		formatting.stylua,
 		builtins.diagnostics.eslint,
-		builtins.completion.spell,
 	},
 })
 
