@@ -38,7 +38,7 @@ keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true }
 keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Make pasting in visual mode not replace data from the yanking register
-keymap.set("x", "<leader>p", [["_dP]])
+keymap.set("x", "p", [["_dP]])
 
 -- Diagnostic keymaps
 keymap.set('n', '[d', vim.diagnostic.goto_prev)
