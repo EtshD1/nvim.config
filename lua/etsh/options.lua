@@ -33,12 +33,14 @@ o.background = "dark"
 
 o.undodir = os.getenv("HOME") .. "/.vim/undodir"
 o.undofile = true
-
 o.incsearch = true
-
+o.showmode = false
 o.scrolloff = 14
 o.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
+vim.opt.termguicolors = true
+o.laststatus= 3
+o.shortmess= 'filqnxtToOCFSsw'
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -50,3 +52,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	group = highlight_group,
 	pattern = '*',
 })
+
+-- Change the Diagnostic symbols in the sign column (gutter)
+local signs = { Error = "", Warn = "", Hint = "ﴞ", Info = "" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end

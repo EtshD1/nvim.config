@@ -1,25 +1,37 @@
-local status, res = pcall(require, 'telescope')
+-- import telescope plugin safely
+local telescope_setup, telescope = pcall(require, "telescope")
+if not telescope_setup then
+  return
+end
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-res.setup {
-	defaults = {
-		mappings = {
-			i = {
-				['<C-u>'] = false,
-				['<C-d>'] = false,
-			},
-		},
-	},
-}
+-- import telescope actions safely
+local actions_setup, actions = pcall(require, "telescope.actions")
+if not actions_setup then
+  return
+end
 
--- Enable telescope fzf native, if installed
-pcall(res.load_extension, 'fzf')
+-- configure telescope
+telescope.setup({
+  -- configure custom mappings
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-k>"] = actions.move_selection_previous, -- move to prev result
+        ["<C-j>"] = actions.move_selection_next, -- move to next result
+        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
+      },
+    },
+  },
+})
 
-local builtin = require('telescope.builtin')
+local status, builtin = pcall(require,'telescope.builtin')
+
+if not status then
+	print('telescope.builtin is not found')
+	return
+end
+
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
--- vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
-vim.keymap.set('n', '<leader>b', builtin.buffers, {})
-vim.keymap.set('n', '<leader>F', function()
-	builtin.grep_string({ search = vim.fn.input("Grep: ") })
-end)
+vim.keymap.set('n', '<leader>fs', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})

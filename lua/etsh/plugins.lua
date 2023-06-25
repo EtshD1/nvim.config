@@ -1,13 +1,16 @@
 -- Install packer
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	is_bootstrap = true
-	vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-	vim.cmd([[packadd packer.nvim]])
+local ensure_packer = function()
+	local fn = vim.fn
+	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+		vim.cmd [[packadd packer.nvim]]
+		return true
+	end
+	return false
 end
 
--- Automatically source and re-compile packer whenever you save this init.lua
+-- Autosync on save
 vim.cmd([[
   augroup packer_user_config
     autocmd!
@@ -15,102 +18,24 @@ vim.cmd([[
   augroup end
 ]])
 
-local packer_status, packer = pcall(require, "packer")
+local packer_bootstrap = ensure_packer()
+
+local packer_status, packer = pcall(require, 'packer')
 
 if not packer_status then
 	print("packer is not found")
 	return
 end
 
-packer.init({
-	-- ensure_dependencies   = true, -- Should packer install plugin dependencies?
-	-- plugin_package = 'packer', -- The default package for plugins
-	-- auto_clean = true, -- During sync(), remove unused plugins
-	-- compile_on_sync = true, -- During sync(), run packer.compile()
-	-- disable_commands = false, -- Disable creating commands
-	-- preview_updates = true, -- If true, always preview updates before choosing which plugins to update, same as `PackerUpdate --preview`.
-	-- display = {
-	--   non_interactive = true, -- If true, disable display windows for all operations
-	--   compact = false, -- If true, fold updates results by default
-	--   working_sym = '⟳', -- The symbol for a plugin being installed/updated
-	--   error_sym = '✗', -- The symbol for a plugin with an error in installation/updating
-	--   done_sym = '✓', -- The symbol for a plugin which has completed installation/updating
-	--   removed_sym = '-', -- The symbol for an unused plugin which was removed
-	--   moved_sym = '→', -- The symbol for a plugin which was moved (e.g. from opt to start)
-	--   header_sym = '━', -- The symbol for the header line in packer's display
-	--   show_all_info = true, -- Should packer show all update details automatically?
-	--   prompt_border = 'double', -- Border style of prompt popups.
-	--   keybindings = { -- Keybindings for the display window
-	--     quit = 'q',
-	--     toggle_update = 'u', -- only in preview
-	--     continue = 'c', -- only in preview
-	--     toggle_info = '<CR>',
-	--     diff = 'd',
-	--     prompt_revert = 'r',
-	--   }
-	-- },
-	-- autoremove = false, -- Remove disabled or unused plugins without prompting the user
-})
+packer.init({})
 
 packer.startup(function(use)
-	-- LspSaga
-	use({
-		"glepnir/lspsaga.nvim",
-		branch = "main",
-		requires = {
-			{ "nvim-tree/nvim-web-devicons" },
-			--Please make sure you install markdown and markdown_inline parser
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-	})
-	-- Package manager
-	use("wbthomason/packer.nvim")
-
-	use({
-		-- LSP Configuration & Plugins
-		"neovim/nvim-lspconfig",
-		requires = {
-			-- Automatically install LSPs to stdpath for neovim
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-
-			-- Useful status updates for LSP
-			"j-hui/fidget.nvim",
-
-			-- Additional lua configuration, makes nvim stuff amazing
-			"folke/neodev.nvim",
-		},
-	})
-	-- File Browser
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons", -- optional, for file icons
-		},
-	})
-
-	use({
-		-- Autocompletion
-		"hrsh7th/nvim-cmp",
-		requires = {
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-nvim-lua",
-			"hrsh7th/cmp-path",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"ray-x/cmp-treesitter",
-			"saadparwaiz1/cmp_luasnip",
-			"L3MON4D3/LuaSnip",
-			"rafamadriz/friendly-snippets",
-			"honza/vim-snippets",
-		},
-	})
-
+	use 'wbthomason/packer.nvim'                                                        -- Packer
+	use { "catppuccin/nvim", as = "catppuccin" }                                        -- Colorschema
+	use "numToStr/Comment.nvim"                                                         -- Commenting
+	use 'fgheng/winbar.nvim'                                                            -- Winbar
+	use 'nvim-tree/nvim-web-devicons'                                                   -- Icons
+	use { 'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons' } -- bufferline
 	use({
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
@@ -118,54 +43,57 @@ packer.startup(function(use)
 			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		end,
 	})
+	use 'lewis6991/gitsigns.nvim' -- Gitsigns
+	use 'nvim-tree/nvim-tree.lua' -- File Explorer
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+	} -- Statusline
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.1',
+		-- or                            , branch = '0.1.x',
+		requires = { {'nvim-lua/plenary.nvim'} }
+	} -- Telescope
+	use {
+		'nvim-telescope/telescope-fzf-native.nvim',
+		run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+	} -- Telescope extension
 
+	-- autocompletion
+	use("hrsh7th/nvim-cmp") -- completion plugin
+	-- use("hrsh7th/cmp-buffer") -- source for text in buffer
+	-- use("hrsh7th/cmp-path") -- source for file system paths
+
+	-- snippets
+	use("L3MON4D3/LuaSnip") -- snippet engine
+	use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+	use("rafamadriz/friendly-snippets") -- common snippets
+	-- Mason
+	use {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig"
+		-- run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+	}
+
+	-- lsp configurations
+	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
 	use({
-		-- Additional text objects via treesitter
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		after = "nvim-treesitter",
-	})
+		"glepnir/lspsaga.nvim",
+		branch = "main",
+		requires = {
+			{ "nvim-tree/nvim-web-devicons" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	}) -- enhanced lsp uis
+	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
-	-- Git related plugins
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rhubarb")
-	use("lewis6991/gitsigns.nvim")
+	-- formatting & linting
+	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
+	use("jayp0521/mason-null-ls.nvim")
 
-	-- For formatting
-	use("jose-elias-alvarez/null-ls.nvim")
-
-	use({ "catppuccin/nvim", as = "catppuccin" })
-	use("nvim-lualine/lualine.nvim") -- Fancier statusline
-	use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
-	use("numToStr/Comment.nvim") -- "gc" to comment visual regions/lines
-
-	-- Fuzzy Finder (files, lsp, etc)
-	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
-
-	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
-
-	-- Diagnostics List
-	use({
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-	})
-
-	-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-	local has_plugins, plugins = pcall(require, "custom.plugins")
-	if has_plugins then
-		plugins(use)
-	end
-
-	if is_bootstrap then
-		require("packer").sync()
+	if packer_bootstrap then
+		packer.sync()
 	end
 end)
-
-if is_bootstrap then
-	print("==================================")
-	print("    Plugins are being installed")
-	print("    Wait until Packer completes,")
-	print("       then restart nvim")
-	print("==================================")
-	return
-end

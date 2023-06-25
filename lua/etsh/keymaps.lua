@@ -14,7 +14,13 @@ keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 keymap.set('n', 'x', '"_x')
 
 -- Deleting buffer
-keymap.set('n', '<C-w>', '<cmd>bdelete<CR>')
+keymap.set('n', '<leader>q', '<cmd>bdelete<CR>')
+
+-- Save
+keymap.set('n', '<leader>w', '<cmd>w<CR>')
+
+-- Hide Search
+keymap.set('n', '<leader>cs', '<cmd>nohl<CR>')
 
 -- Redo
 keymap.set('n', 'U', '<C-r>')
