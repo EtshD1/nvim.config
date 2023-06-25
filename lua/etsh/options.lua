@@ -13,11 +13,11 @@ o.ignorecase = true
 o.smartcase = true
 -- Decrease update time
 o.updatetime = 250
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 -- Set colorscheme
 o.termguicolors = true
 -- Set completeopt to have a better completion experience
-o.completeopt = 'menuone,noselect'
+o.completeopt = "menuone,noselect"
 -- Tabs and indenting
 o.tabstop = 4
 o.softtabstop = 4
@@ -39,23 +39,24 @@ o.scrolloff = 14
 o.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 vim.opt.termguicolors = true
-o.laststatus= 3
-o.shortmess= 'filqnxtToOCFSsw'
+o.laststatus = 3
+o.shortmess = "filqnxtToOCFSsw"
+o.mouse = ""
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank()
 	end,
 	group = highlight_group,
-	pattern = '*',
+	pattern = "*",
 })
 
 -- Change the Diagnostic symbols in the sign column (gutter)
 local signs = { Error = "", Warn = "", Hint = "ﴞ", Info = "" }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
