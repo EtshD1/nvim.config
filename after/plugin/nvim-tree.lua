@@ -5,7 +5,7 @@ if not status then
 	return
 end
 
-nvimTree.setup {
+nvimTree.setup({
 	auto_reload_on_write = true,
 	disable_netrw = false,
 	hijack_cursor = false,
@@ -115,8 +115,8 @@ nvimTree.setup {
 		auto_open = true,
 	},
 	update_focused_file = {
-		enable = false,
-		update_root = false,
+		enable = true,
+		update_root = true,
 		ignore_list = {},
 	},
 	system_open = {
@@ -157,7 +157,7 @@ nvimTree.setup {
 		show_on_dirs = true,
 		show_on_open_dirs = true,
 		disable_for_dirs = {},
-		timeout = 400,
+		timeout = 1000,
 	},
 	modified = {
 		enable = false,
@@ -239,6 +239,6 @@ nvimTree.setup {
 			watcher = false,
 		},
 	},
-}
+})
 
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
