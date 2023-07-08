@@ -19,7 +19,6 @@ null_ls.setup({
 						"--tab-width",
 						params.options.tabSize,
 					}
-					and { "--no-semi", true }
 			end,
 		}),
 		formatting.stylua,
