@@ -13,6 +13,8 @@ vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
+-- Relative line numbers
+vim.o.relativenumber = true
 
 -- Disable mouse mode
 vim.o.mouse = ''
@@ -21,6 +23,25 @@ vim.o.mouse = ''
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
+
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.smartindent = true
+
+vim.o.wrap = false
+
+vim.o.cursorline = true
+
+vim.o.background = "dark"
+
+vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+
+vim.o.showmode = false
+
+vim.o.scrolloff = 10
+
+vim.o.shortmess = "filqnxtToOCFSsw"
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -72,3 +93,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Change the Diagnostic symbols in the sign column (gutter)
+local signs = { Error = "", Warn = "", Hint = "ﴞ", Info = "" }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
