@@ -16,6 +16,8 @@ vim.wo.number = true
 -- Relative line numbers
 vim.o.relativenumber = true
 
+vim.o.laststatus = 3
+
 -- Disable mouse mode
 vim.o.mouse = ''
 
