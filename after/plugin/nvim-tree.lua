@@ -25,7 +25,7 @@ nvimTree.setup({
 		indent_width = 2,
 		special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
 		symlink_destination = true,
-		highlight_git = false,
+		highlight_git = true,
 		highlight_diagnostics = false,
 		highlight_opened_files = "none",
 		highlight_modified = "none",
@@ -262,4 +262,4 @@ nvimTree.setup({
 	}
 })
 
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = 'Toggle File Explorer' })
