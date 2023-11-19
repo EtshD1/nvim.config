@@ -83,6 +83,11 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>k', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>bq', "<cmd>bdelete! %d<cr>", { desc = '[B]uffer [Q]uit' })
+vim.keymap.set('n', '<leader>bw', "<cmd>w<cr>", { desc = '[B]uffer [W]rite' })
+vim.keymap.set('n', '<leader>bn', "<cmd>bn<cr>", { desc = '[B]uffer [N]ext' })
+vim.keymap.set('n', '<leader>bp', "<cmd>bp<cr>", { desc = '[B]uffer [p]revious' })
+vim.keymap.set('n', 'U', '<C-r>', { desc = 'Redo' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
