@@ -87,7 +87,7 @@ vim.keymap.set('n', '<leader>bq', "<cmd>bdelete<cr>", { desc = '[B]uffer [Q]uit'
 vim.keymap.set('n', '<leader>bw', "<cmd>w<cr>", { desc = '[B]uffer [W]rite' })
 vim.keymap.set('n', '<leader>bn', "<cmd>bn<cr>", { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<leader>bp', "<cmd>bp<cr>", { desc = '[B]uffer [P]revious' })
-vim.keymap.set('n', '<leader>bf', "<cmd>Format<cr>", { desc = '[B]uffer [F]ormat' })
+-- vim.keymap.set('n', '<leader>bf', "<cmd>Format<cr>", { desc = '[B]uffer [F]ormat' })
 vim.keymap.set('n', 'U', '<C-r>', { desc = 'Redo' })
 
 -- [[ Highlight on yank ]]
