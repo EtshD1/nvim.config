@@ -11,6 +11,7 @@ conform.setup({
 		-- Conform will run multiple formatters sequentially
 		-- Use a sub-list to run only the first available formatter
 		javascript = { "prettierd" },
+		json = { "prettierd" },
 		javascriptreact = { "prettierd" },
 		typescript = { "prettierd" },
 		typescriptreact = { "prettierd" },
